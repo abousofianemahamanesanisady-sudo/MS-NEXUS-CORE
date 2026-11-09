@@ -1,5 +1,6 @@
 import json
 import uuid
+import httpx
 from fastapi import FastAPI, Depends, HTTPException, Body
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import Response, JSONResponse
@@ -77,6 +78,41 @@ async def ms_digital_network_event(payload: dict = Body(...)):
     if not isinstance(event, str) or not event.strip() or not isinstance(data, dict):
         raise HTTPException(422, "Fournissez un événement texte et un objet data.")
     return await send_event(s.ms_dn_base_url, s.ms_dn_webhook_secret, event, data)
+
+@app.get("/admin/runtime", dependencies=[Depends(require_admin_key)])
+async def admin_runtime():
+    """Probe configured self-hosted inference nodes without exposing their URLs or secrets."""
+    result = {
+        "mode": s.runtime_mode,
+        "text": {"edge_configured": bool(s.local_text_base_url), "edge_reachable": False,
+                 "edge_model": s.local_text_model, "cloud_configured": bool(s.cloud_text_base_url),
+                 "cloud_reachable": False, "cloud_model": s.cloud_text_model},
+        "media": {"image_configured": bool(s.local_image_base_url),
+                  "audio_configured": bool(s.local_audio_base_url),
+                  "video_configured": bool(s.video_api_url)},
+    }
+    timeout = httpx.Timeout(5.0)
+    if s.local_text_base_url:
+        try:
+            async with httpx.AsyncClient(timeout=timeout) as client:
+                response = await client.get(s.local_text_base_url.rstrip("/") + "/api/tags",
+                    headers={"Authorization": f"Bearer {s.local_text_api_key}"} if s.local_text_api_key else {})
+                result["text"]["edge_reachable"] = response.is_success
+                if response.is_success:
+                    names = [m.get("name") for m in response.json().get("models", [])]
+                    result["text"]["edge_model_available"] = s.local_text_model in names or any(
+                        name and name.split(":")[0] == s.local_text_model.split(":")[0] for name in names)
+        except (httpx.HTTPError, ValueError):
+            pass
+    if s.cloud_text_base_url:
+        try:
+            async with httpx.AsyncClient(timeout=timeout) as client:
+                response = await client.get(s.cloud_text_base_url.rstrip("/") + "/models",
+                    headers={"Authorization": f"Bearer {s.cloud_text_api_key}"} if s.cloud_text_api_key else {})
+                result["text"]["cloud_reachable"] = response.is_success
+        except httpx.HTTPError:
+            pass
+    return result
 
 @app.get("/admin/health", dependencies=[Depends(require_admin_key)])
 async def admin_health(db: Session = Depends(get_db)):
