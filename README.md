@@ -18,6 +18,10 @@ Voir [docs/HYBRID_ARCHITECTURE.md](docs/HYBRID_ARCHITECTURE.md).
 
 Commencer par le guide [docs/START_HERE.md](docs/START_HERE.md). La recommandation est de tester d'abord un petit modèle open source sur un ordinateur/serveur disponible, puis de mesurer les besoins avant de louer un GPU cloud. Un téléphone Android seul n'est pas recommandé pour héberger le runtime complet.
 
+## Démarrer depuis un téléphone avec 0 FCFA
+
+Consulter le guide [docs/PHONE_ONLY_FREE_PLAN.md](docs/PHONE_ONLY_FREE_PLAN.md). Il distingue clairement un prototype gratuit (interface et passerelle légère) d'un runtime IA entièrement auto-hébergé, qui nécessite des ressources serveur. Le backend Docker/FastAPI actuel ne se déploie pas directement sur Cloudflare Workers.
+
 ## Démarrer le runtime texte local
 
 1. Copier `.env.example` vers `.env` et remplacer les clés MS NEXUS d'exemple.
