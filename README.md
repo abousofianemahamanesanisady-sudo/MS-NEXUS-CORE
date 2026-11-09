@@ -14,12 +14,17 @@ MS NEXUS AI évolue vers une plateforme autonome **edge + cloud auto-hébergé**
 
 Voir [docs/HYBRID_ARCHITECTURE.md](docs/HYBRID_ARCHITECTURE.md).
 
+## Choisir l'infrastructure sans dépenser tout de suite
+
+Commencer par le guide [docs/START_HERE.md](docs/START_HERE.md). La recommandation est de tester d'abord un petit modèle open source sur un ordinateur/serveur disponible, puis de mesurer les besoins avant de louer un GPU cloud. Un téléphone Android seul n'est pas recommandé pour héberger le runtime complet.
+
 ## Démarrer le runtime texte local
 
 1. Copier `.env.example` vers `.env` et remplacer les clés MS NEXUS d'exemple.
 2. Démarrer l'API et le nœud edge : `docker compose --profile local-ai up --build -d`.
 3. Télécharger un modèle open source : `docker compose exec ollama ollama pull llama3.2:3b`.
 4. Vérifier `http://localhost:8000/health` et appeler `/v1/chat/completions` avec la clé MS NEXUS.
+5. Vérifier l'état des moteurs avec `GET /admin/runtime` et l'en-tête `X-Admin-Key`.
 
 Le modèle est exécuté par Ollama sur le matériel choisi. Pour un vrai cloud GPU auto-hébergé, déployer vLLM/llama.cpp sur une machine contrôlée par le projet, puis renseigner `CLOUD_TEXT_BASE_URL`, `CLOUD_TEXT_MODEL` et éventuellement `CLOUD_TEXT_API_KEY`. Le routage essaie d'abord Edge puis Cloud.
 
