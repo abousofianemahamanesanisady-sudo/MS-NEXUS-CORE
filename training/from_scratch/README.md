@@ -30,11 +30,12 @@ Depuis la racine du dépôt, copier le corpus exemple ou fournir un autre corpus
 
 Le checkpoint est écrit dans `artifacts/nexus-tiny.pt`. Ce fichier de poids n'est pas commité par défaut.
 
-## Génération
+## Génération et évaluation
 
     python training/from_scratch/generate.py --prompt "MS NEXUS" --tokens 200
+    python training/from_scratch/evaluate.py --data training/from_scratch/corpus.txt --checkpoint artifacts/nexus-tiny.pt
 
-Le prompt ne peut contenir que des caractères présents dans le corpus d'entraînement.
+L'évaluateur calcule une perte moyenne sur des lots d'entraînement et de validation, la compare à une baseline uniforme, et produit le SHA-256 du checkpoint. Le prompt ne peut contenir que des caractères présents dans le corpus d'entraînement.
 
 ## Expérience vérifiée le 9 novembre 2026
 
@@ -43,6 +44,10 @@ Le notebook Deepnote distinct **MS NEXUS PRIME — Entraînement depuis zéro** 
 La génération obtenue reste incohérente. Cette expérience valide le fonctionnement technique du pipeline, pas une capacité conversationnelle utile. Le rapport complet est dans [EXPERIMENT_2026-11-09.md](EXPERIMENT_2026-11-09.md).
 
 **Important :** le notebook d'expérience et le script `train.py` du dépôt ont des configurations distinctes. Les métriques du rapport correspondent au notebook Deepnote, pas à une exécution de ce script CLI.
+
+## Préparation Cloudflare
+
+Les conditions et les étapes obligatoires avant d'utiliser le checkpoint sur Cloudflare sont décrites dans [INDEPENDENT_MODEL_CLOUDFLARE_DEPLOYMENT.md](../../docs/INDEPENDENT_MODEL_CLOUDFLARE_DEPLOYMENT.md). Le fichier PyTorch `.pt` n'est pas directement exécutable dans un Worker JavaScript. Le Worker de production reste séparé et ne charge pas ce prototype.
 
 ## Prochaines étapes scientifiques
 
