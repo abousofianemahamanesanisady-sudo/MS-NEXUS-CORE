@@ -1,0 +1,18 @@
+{
+  "project": "MS NEXUS PRIME",
+  "experiment": "character-transformer-from-scratch",
+  "initialization": "random",
+  "external_model_api": false,
+  "pretrained_weights": false,
+  "corpus_characters": 18672,
+  "vocabulary_characters": 70,
+  "parameters": 113222,
+  "steps": 300,
+  "train_cross_entropy_64_batches": 2.488535,
+  "validation_cross_entropy_64_batches": 2.624087,
+  "uniform_random_baseline_cross_entropy": 4.248495,
+  "checkpoint_file": "nexus_tiny_checkpoint.pt",
+  "checkpoint_bytes": 498583,
+  "checkpoint_sha256": "faa8e4c4c7571d9e81118cb4aa6782d73f6f39ce104ce0729c3f00fc60024331",
+  "deployment_status": "not_deployed_generation_not_yet_useful"
+}
