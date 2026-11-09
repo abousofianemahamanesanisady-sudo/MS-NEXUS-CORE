@@ -56,3 +56,7 @@ Configurer `MS_DN_BASE_URL` et `MS_DN_WEBHOOK_SECRET` côté serveur. L'API `POS
 ## État de cette phase
 
 La fondation edge-first, le registre de modèles, le fallback vers un nœud cloud auto-hébergé et le premier connecteur signé sont ajoutés. Cela ne constitue pas encore un modèle propriétaire entraîné, ni des moteurs locaux image/audio/vidéo prêts à l'emploi. Les tests et le déploiement matériel restent à faire.
+
+## Vision universelle et feuille de route
+
+La vision cible associe une intelligence centrale à des studios spécialisés (applications, web, jeux, animation, médias, 3D et conception technologique). Lire [l'architecture universelle](docs/UNIVERSAL_ARCHITECTURE.md) et la [feuille de route intelligence d'abord](docs/ROADMAP_UNIVERSAL_AI.md). Ces documents décrivent une cible et des étapes à réaliser ; ils ne déclarent pas ces capacités déjà opérationnelles.
