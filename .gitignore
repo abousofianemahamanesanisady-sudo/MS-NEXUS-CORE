@@ -3,4 +3,6 @@
 __pycache__/
 .pytest_cache/
 data/
+artifacts/
+training/from_scratch/corpus.txt
 *.py[cod]
