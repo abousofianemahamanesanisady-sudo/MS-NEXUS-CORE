@@ -60,3 +60,10 @@ La fondation edge-first, le registre de modèles, le fallback vers un nœud clou
 ## Vision universelle et feuille de route
 
 La vision cible associe une intelligence centrale à des studios spécialisés (applications, web, jeux, animation, médias, 3D et conception technologique). Lire [l'architecture universelle](docs/UNIVERSAL_ARCHITECTURE.md) et la [feuille de route intelligence d'abord](docs/ROADMAP_UNIVERSAL_AI.md). Ces documents décrivent une cible et des étapes à réaliser ; ils ne déclarent pas ces capacités déjà opérationnelles.
+
+
+## Catalogue étendu des capacités
+
+Le catalogue des studios cibles couvre aussi la création documentaire, le design, l'audio, le cinéma, la 3D, les expériences VR/AR/4D, les systèmes d'exploitation, les consoles, la robotique, les inventions, l'agriculture, les sciences, l'éducation, la santé informative, le business, le climat, le transport, l'accessibilité et la cybersécurité défensive. Voir [le catalogue dans l'architecture universelle](docs/UNIVERSAL_ARCHITECTURE.md#10-catalogue-étendu-des-domaines-de-création) et [les phases d'extension](docs/ROADMAP_UNIVERSAL_AI.md#phase-9--studios-spécialisés-et-nouveaux-domaines).
+
+Tous ces domaines sont des objectifs planifiés : chaque capacité doit être intégrée, configurée et testée avant d'être annoncée comme disponible.
