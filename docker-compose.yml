@@ -8,6 +8,7 @@ services:
       DATABASE_URL: sqlite:////data/ms_nexus.db
     volumes:
       - nexus_data:/data
+
   video-worker:
     build: .
     restart: unless-stopped
@@ -19,5 +20,15 @@ services:
       - nexus_data:/data
     depends_on:
       - api
+
+  # Optional edge inference node. Start with: docker compose --profile local-ai up -d
+  ollama:
+    image: ollama/ollama:latest
+    profiles: ["local-ai"]
+    restart: unless-stopped
+    volumes:
+      - ollama_models:/root/.ollama
+
 volumes:
   nexus_data:
+  ollama_models:

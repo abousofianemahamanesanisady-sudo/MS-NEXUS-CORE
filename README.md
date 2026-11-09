@@ -1,24 +1,45 @@
-# MS NEXUS CORE — v2.1
+# MS NEXUS AI — Hybrid Autonomous Runtime 2.2
 
-Backend FastAPI de MS NEXUS AI : chat, images, synthèse vocale et génération vidéo via fournisseur externe.
+MS NEXUS AI évolue vers une plateforme autonome **edge + cloud auto-hébergé**. Par défaut, le chat utilise un modèle open source exécuté sur un nœud contrôlé par le projet. Un nœud cloud GPU auto-hébergé peut prendre le relais. Aucun endpoint GPT, Gemini, Claude ou autre API commerciale n'est appelé par défaut.
 
-## Vidéo : file sans quota applicatif
-L'API n'impose pas de limite cumulative au nombre de demandes vidéo. Chaque demande est enregistrée dans SQLite avec l'état `queued`, puis le service `video-worker` la transmet au fournisseur. Les demandes peuvent donc s'accumuler dans la file et être traitées au rythme des ressources disponibles.
+## Architecture
 
-**Cela ne signifie pas une génération gratuite ou matériellement infinie.** Le fournisseur vidéo peut imposer des quotas, des frais, des limites de durée ou des limites de concurrence. Le débit dépend aussi du compte fournisseur et de l'infrastructure. Le worker fourni soumet les tâches et conserve l'identifiant retourné ; le suivi du rendu final côté fournisseur peut nécessiter un adaptateur de polling propre à ce fournisseur.
+- **NEXUS Gateway** : API FastAPI, authentification et contrats d'API.
+- **NEXUS Runtime** : registre des capacités et routage edge-first.
+- **Edge** : Ollama sur machine locale ou serveur privé.
+- **Cloud** : endpoint vLLM/llama.cpp auto-hébergé et privé, activable comme secours.
+- **Media Workers** : moteurs auto-hébergés distincts pour image, audio et vidéo.
+- **MS CONNECT** : premier adaptateur HMAC pour MS DIGITAL NETWORK.
+- **Training/Data** : future couche de jeux de données, évaluation et fine-tuning contrôlés.
 
-## Installation
-1. Copier `.env.example` vers `.env`.
-2. Ajouter les clés et URL réelles du fournisseur IA et vidéo.
-3. Lancer `docker compose up --build -d`.
-4. Ouvrir `http://localhost:8000/docs`.
+Voir [docs/HYBRID_ARCHITECTURE.md](docs/HYBRID_ARCHITECTURE.md).
 
-API : `http://localhost:8000` — Santé : `/health`.
+## Démarrer le runtime texte local
 
-Les routes `/v1` exigent `Authorization: Bearer VOTRE_CLE`. Vidéo : configurer `VIDEO_API_URL` et `VIDEO_API_KEY`. Le fournisseur doit accepter un POST JSON avec `prompt`, `model` et `duration`, et répondre avec `id` ou `job_id`.
+1. Copier `.env.example` vers `.env` et remplacer les clés MS NEXUS d'exemple.
+2. Démarrer l'API et le nœud edge : `docker compose --profile local-ai up --build -d`.
+3. Télécharger un modèle open source : `docker compose exec ollama ollama pull llama3.2:3b`.
+4. Vérifier `http://localhost:8000/health` et appeler `/v1/chat/completions` avec la clé MS NEXUS.
 
-## Vérifier une vidéo
-Envoyer un POST à `/v1/videos/generations`, puis consulter `GET /v1/jobs/{id}` avec la même clé API. États : `queued`, `processing`, `submitted` ou `failed`.
+Le modèle est exécuté par Ollama sur le matériel choisi. Pour un vrai cloud GPU auto-hébergé, déployer vLLM/llama.cpp sur une machine contrôlée par le projet, puis renseigner `CLOUD_TEXT_BASE_URL`, `CLOUD_TEXT_MODEL` et éventuellement `CLOUD_TEXT_API_KEY`. Le routage essaie d'abord Edge puis Cloud.
 
-## Sécurité et limites
-Ce backend orchestre des modèles externes ; il ne contient pas de modèle vidéo entraîné. Changez les clés d'exemple, activez HTTPS, gardez `.env` secret et utilisez un stockage persistant. Les intégrations nécessitent des clés fournisseur valides et des tests réels.
+## Capacités multimédia
+
+`/v1/images/generations` et `/v1/audio/speech` attendent des nœuds auto-hébergés compatibles avec les routes correspondantes. `/v1/videos/generations` conserve une file persistante; `VIDEO_API_URL` doit pointer vers le worker vidéo auto-hébergé, avec une clé facultative si le service est privé. Une capacité vide est annoncée comme non configurée et retourne HTTP 503 : aucune bascule silencieuse vers un fournisseur commercial.
+
+L'absence de quota cumulatif applicatif ne signifie pas une capacité infinie : la limite réelle dépend du GPU/CPU, de la RAM, du stockage, de l'électricité et du nombre de workers.
+
+## Connecteur MS DIGITAL NETWORK
+
+Configurer `MS_DN_BASE_URL` et `MS_DN_WEBHOOK_SECRET` côté serveur. L'API `POST /v1/connectors/ms-digital-network/events` relaie les événements vers `/api/integrations/ms-nexus/events` avec une signature HMAC SHA-256 et un horodatage. Le backend MS DIGITAL NETWORK doit implémenter la vérification de signature et cette route avant que la connexion soit opérationnelle.
+
+## Sécurité
+
+- Ne jamais committer les fichiers `.env` ou les clés.
+- Exposer les nœuds d'inférence uniquement via réseau privé/VPN et TLS.
+- Les données utilisateur ne sont pas automatiquement utilisées pour l'entraînement.
+- Les routes `/v1` exigent `Authorization: Bearer VOTRE_CLE`.
+
+## État de cette phase
+
+La fondation edge-first, le registre de modèles, le fallback vers un nœud cloud auto-hébergé et le premier connecteur signé sont ajoutés. Cela ne constitue pas encore un modèle propriétaire entraîné, ni des moteurs locaux image/audio/vidéo prêts à l'emploi. Les tests et le déploiement matériel restent à faire.
