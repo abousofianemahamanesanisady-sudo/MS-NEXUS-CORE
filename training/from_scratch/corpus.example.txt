@@ -1,0 +1,141 @@
+MS NEXUS PRIME — corpus expérimental français
+Version 1.0 — textes originaux rédigés pour tester une chaîne d'entraînement locale.
+Ce corpus est un petit jeu de démonstration. Il ne représente pas une encyclopédie et ne suffit pas à créer un assistant généraliste.
+
+L'apprentissage automatique consiste à ajuster les paramètres d'un programme à partir d'exemples. Un modèle reçoit des données, produit une prédiction, compare cette prédiction à une cible, puis modifie ses paramètres pour réduire l'erreur. Cette opération est répétée de nombreuses fois. La qualité dépend de la diversité des exemples, de leur exactitude, de la taille du modèle et des ressources de calcul.
+
+Un réseau de neurones est composé de couches de calcul. Chaque couche transforme une représentation numérique en une autre représentation. Les paramètres sont initialisés avec de petites valeurs aléatoires. Au début, le modèle ne connaît pas le langage. Il découvre progressivement des régularités statistiques dans les données qu'il observe.
+
+Un Transformer utilise un mécanisme appelé attention. L'attention permet à chaque position d'une séquence de prendre en compte d'autres positions. Dans un modèle autorégressif, un masque causal empêche de regarder les caractères futurs. Le modèle apprend ainsi à prédire le prochain caractère à partir du contexte précédent.
+
+La fonction de perte mesure l'écart entre les prédictions et les réponses attendues. Une perte plus faible sur les exemples d'entraînement indique que le modèle s'adapte à ces exemples. Une perte de validation permet de vérifier son comportement sur des données mises de côté. Une perte basse ne garantit ni la vérité ni la compréhension.
+
+Les données d'entraînement doivent être choisies avec soin. Il faut privilégier les textes originaux, les documents du domaine public et les contenus dont la licence autorise explicitement l'utilisation. Il faut éviter les mots de passe, les clés secrètes, les conversations privées, les dossiers personnels et les informations confidentielles. Une donnée disponible sur Internet n'est pas automatiquement libre de droits.
+
+Le français possède des accents, des apostrophes et des signes de ponctuation. Un tokenizer caractère par caractère attribue un identifiant à chaque caractère rencontré. Cette méthode est simple à programmer, mais elle est moins efficace qu'une tokenisation par sous-mots. Elle sert surtout à comprendre les premières étapes d'un modèle de langage.
+
+Une séquence est une suite ordonnée de symboles. Le contexte est la partie précédente de la séquence utilisée pour faire une prédiction. La taille du contexte limite le nombre de caractères visibles par le modèle à chaque étape. Une taille plus grande augmente les besoins en mémoire et en calcul.
+
+Un lot, ou batch, contient plusieurs exemples traités ensemble. La taille du lot influence l'utilisation de la mémoire. Sur une petite machine, il est préférable de choisir un lot modeste. L'accumulation de gradients et les séquences courtes peuvent aider à limiter la consommation de mémoire.
+
+L'optimiseur AdamW ajuste les paramètres en utilisant des estimations des gradients. Le taux d'apprentissage contrôle l'ampleur des mises à jour. Un taux trop élevé peut rendre l'entraînement instable. Un taux trop faible peut ralentir l'apprentissage. Il faut observer les pertes et vérifier que le programme fonctionne correctement.
+
+L'entraînement et l'évaluation sont deux étapes différentes. Les données d'entraînement servent à ajuster les poids. Les données de validation servent à mesurer la généralisation sur des exemples non utilisés pour les mises à jour. Il ne faut pas confondre mémorisation et capacité à répondre correctement à une question nouvelle.
+
+Un point de contrôle, appelé checkpoint, sauvegarde les paramètres du modèle et les informations nécessaires pour reprendre ou utiliser le modèle. Il faut conserver une copie des paramètres, du tokenizer, de la configuration et de la version du corpus. Sans ces éléments, un résultat peut être difficile à reproduire.
+
+Une génération de texte commence par une invite appelée prompt. Le modèle calcule une distribution de probabilités sur les prochains symboles. Une méthode d'échantillonnage choisit un symbole, puis le modèle recommence avec le contexte augmenté. La température modifie la diversité des choix. Une température élevée produit souvent des sorties plus variées, mais aussi plus imprévisibles.
+
+Un modèle entraîné sur un petit corpus peut répéter des passages, produire des mots incomplets ou inventer des phrases. Ces défauts sont normaux dans une expérience réduite. Il ne faut pas présenter un prototype comme un assistant fiable. Toute réponse importante doit être vérifiée avec des sources indépendantes.
+
+L'intelligence artificielle est un ensemble de méthodes informatiques qui accomplissent des tâches associées à certaines capacités humaines, comme reconnaître des motifs, classer des images, traduire des phrases ou générer du texte. Les systèmes actuels restent limités par leurs données, leur architecture, leur calcul et leurs objectifs.
+
+L'informatique repose sur des instructions précises. Un algorithme décrit une suite d'étapes pour résoudre un problème. Une variable conserve une valeur. Une fonction regroupe des instructions réutilisables. Une boucle répète un traitement. Une condition choisit une action selon une situation.
+
+Python est un langage de programmation lisible et largement utilisé dans la recherche. Une liste contient plusieurs éléments ordonnés. Un dictionnaire associe des clés à des valeurs. Une fonction se définit avec le mot-clé def. Une bibliothèque ajoute des outils spécialisés. PyTorch permet de créer des tenseurs, des réseaux de neurones et des boucles d'entraînement.
+
+Un tenseur est une structure numérique multidimensionnelle. Un vecteur possède une dimension, une matrice en possède deux et un tenseur général peut en posséder davantage. Les opérations matricielles sont au cœur des réseaux de neurones. Les calculs peuvent être exécutés sur un processeur ou sur un processeur graphique lorsque le matériel et le logiciel le permettent.
+
+Un processeur central exécute des instructions générales. Un processeur graphique réalise efficacement de nombreuses opérations numériques parallèles. Les grands modèles demandent beaucoup de mémoire et de puissance de calcul. Une machine CPU modeste convient à l'apprentissage des principes et à de petits essais, mais pas à l'entraînement d'un grand modèle moderne.
+
+La mémoire vive conserve temporairement les données utilisées par les programmes. Les paramètres du modèle, les activations et les lots occupent de la mémoire. Lorsque la mémoire manque, le programme peut ralentir ou échouer. Il faut adapter la taille du modèle aux ressources réellement disponibles.
+
+Un projet logiciel doit être organisé. Le code source décrit le fonctionnement. Les données sont conservées séparément. Les résultats et les checkpoints sont sauvegardés dans un dossier dédié. Un fichier de documentation explique comment installer, exécuter et vérifier le projet. Le contrôle de version permet de suivre les changements.
+
+Git enregistre l'historique des modifications d'un projet. Un dépôt peut être hébergé sur une plateforme de développement. Une branche permet de travailler sans modifier directement la branche principale. Une demande de fusion doit être examinée avant d'intégrer des changements importants. Les secrets ne doivent jamais être enregistrés dans un dépôt public.
+
+Une API est une interface qui permet à deux logiciels de communiquer. Une clé API est un secret d'authentification. Elle doit rester confidentielle et être stockée dans un gestionnaire de secrets. Un programme ne doit jamais afficher une clé dans ses journaux ou la publier dans un fichier accessible au public.
+
+Un service cloud fournit des ressources informatiques à distance. Un serveur reçoit des requêtes et renvoie des réponses. Un déploiement met une application à disposition des utilisateurs. Les journaux permettent d'observer les erreurs et les performances. Il faut tester les routes principales avant de déclarer une application opérationnelle.
+
+La sécurité informatique vise à protéger les systèmes, les données et les utilisateurs. Un mot de passe robuste doit être unique et difficile à deviner. L'authentification vérifie une identité. L'autorisation détermine les actions permises. Le chiffrement protège les données pendant leur stockage ou leur transmission.
+
+La protection de la vie privée exige de limiter la collecte aux informations nécessaires. Les utilisateurs doivent comprendre quelles données sont conservées et pourquoi. Une application doit permettre de corriger ou de supprimer les données lorsque cela est prévu par ses règles. Les informations sensibles ne doivent pas être utilisées comme corpus sans consentement approprié.
+
+Une bonne réponse distingue les faits, les hypothèses et les opinions. Lorsqu'une information manque, il vaut mieux le dire que l'inventer. Une estimation doit être présentée comme une estimation. Une affirmation technique doit pouvoir être testée. Une conclusion doit être proportionnée aux preuves disponibles.
+
+Pour apprendre une notion, on peut commencer par une définition simple, examiner un exemple, réaliser un exercice et vérifier le résultat. La répétition espacée aide à consolider les connaissances. Les erreurs sont utiles lorsqu'elles sont analysées et corrigées. Un bon apprentissage progresse par étapes.
+
+Les mathématiques fournissent des outils pour décrire les relations et les changements. Une fonction associe une valeur d'entrée à une valeur de sortie. Une moyenne résume un ensemble de nombres. Une probabilité mesure un degré d'incertitude dans un cadre défini. Un gradient indique la direction d'une variation locale d'une fonction.
+
+La statistique aide à résumer et interpréter des données. Une moyenne peut être influencée par des valeurs extrêmes. Une médiane décrit le centre d'une série ordonnée. Une corrélation indique une association, mais ne prouve pas à elle seule une relation de cause à effet. Il faut examiner la méthode de collecte et la qualité des données.
+
+La méthode scientifique commence par une question claire. On formule une hypothèse, on conçoit une expérience, on recueille des observations et on analyse les résultats. Une expérience doit pouvoir être répétée. Les résultats négatifs sont également informatifs. Il faut documenter les limites et éviter les conclusions excessives.
+
+La connaissance se construit en confrontant les idées aux preuves. Une source doit être évaluée selon son auteur, sa date, sa méthode et ses références. Plusieurs sources indépendantes peuvent aider à confirmer une information. Une citation doit être exacte et replacée dans son contexte.
+
+L'éducation permet de développer l'autonomie et l'esprit critique. Un élève peut progresser en organisant son temps, en posant des questions et en pratiquant régulièrement. Comprendre une idée est plus important que mémoriser une phrase sans en saisir le sens. Un exemple concret facilite souvent l'explication.
+
+L'entrepreneuriat consiste à identifier un besoin et à proposer une solution utile. Un projet doit définir ses utilisateurs, ses objectifs, ses coûts et ses risques. Un prototype permet de tester une idée avant d'investir davantage. Les retours des utilisateurs aident à améliorer le produit.
+
+Un réseau social permet aux personnes de publier des contenus et d'interagir. Les fonctionnalités peuvent inclure des profils, des publications, des commentaires, des réactions et des notifications. La modération contribue à limiter les abus. Les paramètres de confidentialité donnent aux membres un contrôle sur leurs informations.
+
+Une bibliothèque numérique organise des livres et des documents. Un lecteur doit pouvoir retrouver un titre, consulter sa description et accéder au fichier lorsque les droits le permettent. Les métadonnées facilitent la recherche. Une couverture ne remplace pas le contenu d'un ouvrage.
+
+Une application fiable doit afficher des messages compréhensibles. Lorsqu'une action échoue, l'utilisateur doit savoir ce qui s'est passé et comment réessayer. Un indicateur de chargement évite de laisser croire que l'application est bloquée. Les tests doivent couvrir les cas normaux et les erreurs.
+
+L'accessibilité numérique consiste à rendre les services utilisables par des personnes ayant des besoins variés. Les textes doivent être lisibles. Les boutons doivent être identifiables. Les contrastes doivent être suffisants. Les informations importantes ne doivent pas être communiquées uniquement par la couleur.
+
+Le développement durable cherche à répondre aux besoins présents sans compromettre les possibilités des générations futures. Il concerne l'environnement, l'économie et la société. Les décisions doivent tenir compte des ressources, des impacts et des personnes concernées.
+
+L'énergie solaire transforme le rayonnement du soleil en électricité ou en chaleur. Un panneau photovoltaïque produit un courant électrique. Une batterie peut stocker une partie de l'énergie produite. Le dimensionnement dépend de la consommation, de l'ensoleillement et des pertes du système.
+
+L'eau potable est essentielle à la santé et à la vie quotidienne. La qualité de l'eau dépend de sa source, de son traitement et de sa conservation. Les installations doivent être entretenues. Les informations sanitaires doivent provenir de sources compétentes et actualisées.
+
+L'agriculture dépend du sol, de l'eau, du climat et des pratiques humaines. La rotation des cultures peut contribuer à préserver la fertilité. Une irrigation adaptée évite le gaspillage. Les décisions agricoles doivent tenir compte des conditions locales et des connaissances des producteurs.
+
+L'économie étudie la production, la distribution et la consommation des biens et services. Un budget compare les recettes et les dépenses. Une épargne met de côté une partie des ressources. Une décision économique comporte souvent des compromis et des incertitudes.
+
+La communication claire utilise des phrases précises et une structure logique. Il est utile de commencer par l'idée principale, puis d'ajouter les explications nécessaires. Les termes techniques doivent être définis. Un texte destiné au grand public doit éviter le jargon inutile.
+
+Une question bien formulée précise le sujet et le résultat attendu. Si la demande est ambiguë, une seule question de clarification peut suffire. Une réponse utile propose une démarche réalisable et indique les limites. Il ne faut pas promettre une action qui n'a pas réellement été exécutée.
+
+Exemple de dialogue :
+Question : Qu'est-ce qu'un modèle de langage ?
+Réponse : C'est un programme entraîné à estimer les prochains éléments d'un texte à partir du contexte. Il apprend des régularités statistiques dans des exemples.
+Question : Est-ce qu'un petit modèle sait tout faire ?
+Réponse : Non. Ses capacités dépendent de sa taille, de ses données et de son entraînement. Un prototype minuscule sert d'abord à vérifier le fonctionnement technique.
+Question : Pourquoi faut-il tester les réponses ?
+Réponse : Parce qu'un modèle peut produire une phrase plausible mais fausse. Les informations importantes doivent être vérifiées.
+
+Exemple de dialogue :
+Question : Pourquoi séparer les données de validation ?
+Réponse : Pour mesurer le comportement du modèle sur des exemples qu'il n'a pas utilisés pour mettre à jour ses paramètres.
+Question : Que signifie une perte élevée ?
+Réponse : Le modèle prédit encore difficilement les éléments attendus. Il faut examiner les données, le code et les paramètres.
+Question : Une perte faible prouve-t-elle que le modèle comprend ?
+Réponse : Non. Elle indique seulement une meilleure prédiction sur la tâche et les données évaluées.
+
+Exemple de dialogue :
+Question : Peut-on entraîner un grand modèle sur un petit ordinateur ?
+Réponse : Un grand modèle moderne demande généralement beaucoup de mémoire et de calcul. Un petit ordinateur peut servir à apprendre les bases et entraîner un prototype réduit.
+Question : Faut-il utiliser un GPU ?
+Réponse : Un GPU accélère souvent les opérations d'apprentissage profond, mais un petit modèle peut être testé sur CPU.
+Question : Peut-on inventer les résultats ?
+Réponse : Non. Il faut enregistrer les mesures réellement obtenues et signaler les échecs.
+
+Exemple de dialogue :
+Question : Comment protéger une clé API ?
+Réponse : Il faut la conserver dans un gestionnaire de secrets, limiter ses permissions et la renouveler si elle est exposée.
+Question : Peut-on publier la clé dans GitHub ?
+Réponse : Non. Un dépôt public peut rendre la clé accessible à des personnes non autorisées.
+Question : Que faire si une clé apparaît dans un journal ?
+Réponse : Il faut la révoquer ou la renouveler et supprimer l'exposition lorsque c'est possible.
+
+Exemple de dialogue :
+Question : Comment vérifier une information ?
+Réponse : Il faut rechercher des sources fiables, vérifier la date et comparer les éléments indépendants.
+Question : Que faire si les sources se contredisent ?
+Réponse : Présenter le désaccord, expliquer les différences de méthode et éviter une certitude injustifiée.
+Question : Pourquoi citer les sources ?
+Réponse : Pour permettre au lecteur de contrôler l'origine des affirmations.
+
+MS DIGITAL NETWORK est un projet numérique qui peut réunir des outils, des services et des espaces communautaires. Un produit numérique doit être testé avec de vrais scénarios. Les statuts, les profils, les notifications et les espaces professionnels doivent respecter les permissions des utilisateurs. Une interface soignée ne suffit pas si les données ne sont pas enregistrées correctement.
+
+MS NEXUS PRIME est le nom du prototype étudié dans ce laboratoire. Son objectif technique est d'explorer une architecture de langage entraînée depuis une initialisation aléatoire. Le nom du projet ne prouve pas son niveau de capacité. Les résultats doivent être mesurés et publiés avec honnêteté.
+
+La première étape consiste à obtenir un programme reproductible. La deuxième consiste à vérifier que les données sont chargées correctement. La troisième consiste à effectuer des mises à jour des paramètres. La quatrième consiste à sauvegarder un checkpoint. La cinquième consiste à produire un échantillon et à évaluer les limites du résultat.
+
+Une expérience réussie n'est pas nécessairement un produit fini. Elle peut montrer qu'un pipeline fonctionne, révéler un problème de mémoire ou démontrer qu'un corpus est trop petit. Chaque résultat aide à décider de l'étape suivante. Il faut préférer une progression mesurée à une promesse spectaculaire.
+
+Fin du corpus expérimental initial.
