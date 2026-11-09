@@ -140,3 +140,75 @@ Chaque modalité a un adaptateur, un test de génération réel, des limites de 
 ## Prochaine tâche technique
 
 Commencer par **Phase 0 : audit de l'existant**, puis implémenter le contrat de tâches et le registre des capacités avant de construire un système multi-agents complexe.
+
+
+## Phase 9 — Studios spécialisés et nouveaux domaines
+
+Cette phase étend les studios au-delà des premiers prototypes APP/WEB et GAME. Elle est réalisée par modules indépendants, selon la demande et les ressources.
+
+### 9A — Création et médias
+- Documents, livres numériques, présentations et traduction.
+- Design, image et identité visuelle.
+- Audio : transcription, synthèse, voix et composition originale.
+- Cinéma, animation, storyboard, montage et effets visuels.
+- 3D, scènes, assets et préparation à l'impression 3D.
+
+**Sortie :** une chaîne de production média avec fichiers exportables, licences et provenance documentées.
+
+### 9B — Expériences immersives et jeux avancés
+- Jeux 2D/3D, simulation et multijoueur.
+- Pipeline de scènes, assets, scripts, builds et tests.
+- VR/AR et visualisation spatiale.
+- Expériences 4D avec accessoires haptiques, mouvement, vibration, vent ou audio spatial selon le matériel disponible.
+
+**Sortie :** prototype jouable testé ; prototype immersif/4D validé sur matériel compatible.
+
+### 9C — Ingénierie, appareils et monde physique
+- OS, logiciels systèmes, pilotes et embarqué.
+- Conception de consoles, contrôleurs et électronique.
+- Robotique simulée puis test sur banc sécurisé.
+- Drones, véhicules, énergie, bâtiments et infrastructures.
+- Inventeur : CAO, schémas, nomenclatures, prototypes et dossiers de fabrication.
+- Jumeaux numériques et simulations.
+
+**Sortie :** dossiers techniques vérifiés et prototypes seulement lorsque des spécialistes, équipements et moyens de test sont disponibles.
+
+### 9D — Sciences et services utiles
+- Mathématiques, recherche, visualisation et calcul.
+- Agriculture, irrigation et analyse de cultures.
+- Éducation et apprentissage personnalisé.
+- Santé/bien-être à visée informative et administrative, sous contrôle professionnel.
+- Business, comptabilité assistée et analyse de données.
+- Informations juridiques générales avec contexte de juridiction.
+- Climat, environnement, transport et logistique.
+- Accessibilité, traduction et langues locales.
+
+**Sortie :** modules évalués sur des cas réels représentatifs, avec limites et validation humaine explicites.
+
+### 9E — Écosystème et confiance
+- API/SDK, plugins signés et catalogue de capacités.
+- Mode local/hors ligne lorsque possible.
+- Collaboration, espaces d'équipe et classe virtuelle.
+- Centre de validation humaine et journal de provenance.
+- Gestion des versions, restauration, coûts et ressources.
+- Sécurité défensive et évaluations de robustesse.
+
+**Sortie :** écosystème extensible, auditable et contrôlable.
+
+## Nouvelles idées à garder dans le portefeuille de recherche
+
+- **NEXUS Digital Twin** : jumeaux numériques d'usines, bâtiments, réseaux et produits.
+- **NEXUS Earth** : tableaux de bord eau, agriculture, climat et environnement.
+- **NEXUS Local Languages** : corpus validés et outils vocaux pour langues locales, sans inventer de qualité linguistique non mesurée.
+- **NEXUS Accessibility** : assistant de lecture, sous-titrage, simplification et interfaces inclusives.
+- **NEXUS Lab Simulator** : laboratoires virtuels pour apprendre et tester des expériences sans danger.
+- **NEXUS Maker** : préparation de fichiers pour impression 3D, découpe et fabrication, avec contrôle des dimensions.
+- **NEXUS Knowledge Graph** : relier les connaissances et sources avec dates, citations et niveaux de confiance.
+- **NEXUS Team OS** : gestion de projets, tâches, fichiers, rôles et collaboration.
+- **NEXUS Quality Gate** : aucun livrable ne passe en « prêt » sans critères et tests définis.
+- **NEXUS Personal Cloud** : espace privé de projets et sauvegardes, soumis aux quotas et au budget.
+
+## Séquencement et garde-fous
+
+Les phases 9A à 9E ne doivent pas être développées en bloc. Choisir un seul module après les fondations, réaliser un prototype, mesurer la qualité et les ressources, puis décider de la suite. Les fonctions médicales, juridiques, financières, de sécurité et de contrôle physique requièrent des contrôles spécialisés et une supervision humaine. Les domaines spatiaux, véhicules, drones et énergie commencent par la simulation et l'analyse, jamais par le pilotage réel autonome.
+
