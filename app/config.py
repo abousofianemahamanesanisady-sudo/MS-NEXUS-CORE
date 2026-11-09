@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     video_api_url: str = ""
     video_api_key: str = ""
     video_timeout_seconds: int = 300
+    video_worker_poll_seconds: int = 3
     cors_origins: str = "http://localhost:3000,http://localhost:5173"
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
     @property
