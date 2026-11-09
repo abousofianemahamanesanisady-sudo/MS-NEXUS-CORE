@@ -1,0 +1,16 @@
+services:
+  nexus-api:
+    build: ./server
+    ports:
+      - "8000:8000"
+    environment:
+      NEXUS_ADMIN_KEY: "CHANGE_THIS_TO_A_LONG_RANDOM_SECRET"
+      NEXUS_DB_PATH: "/data/nexus.db"
+      NEXUS_OUTPUT_DIR: "/data/outputs"
+      # Set this to a locally downloaded model directory on a GPU host:
+      # NEXUS_IMAGE_MODEL_ID: "/models/sdxl"
+    volumes:
+      - nexus-data:/data
+      # - ./models:/models:ro
+volumes:
+  nexus-data:

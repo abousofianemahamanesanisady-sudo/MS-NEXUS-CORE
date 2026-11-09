@@ -1,0 +1,25 @@
+models:
+  text:
+    id: nexus-text-qwen
+    family: Qwen
+    status: planned
+    runtime: transformers
+    notes: "Choose an exact checkpoint and verify its license before deployment."
+  image:
+    id: nexus-image-sdxl
+    family: Stable Diffusion XL
+    status: adapter_available
+    runtime: diffusers
+    env: NEXUS_IMAGE_MODEL_ID
+  video:
+    id: nexus-video-wan
+    family: Wan 2.1
+    status: integration_required
+    runtime: diffusers_or_official_runtime
+    notes: "GPU-intensive; implement a dedicated asynchronous worker."
+  audio:
+    id: nexus-audio-kokoro
+    family: Kokoro
+    status: integration_required
+    runtime: kokoro
+    notes: "Verify model and voice licensing before offering public generation."

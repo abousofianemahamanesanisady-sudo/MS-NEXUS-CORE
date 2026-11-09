@@ -1,0 +1,6 @@
+name = "ms-nexus-ai-gateway"
+main = "src/index.js"
+compatibility_date = "2026-11-09"
+
+[vars]
+# Set NEXUS_BACKEND_URL as a secret or environment variable at deployment.
