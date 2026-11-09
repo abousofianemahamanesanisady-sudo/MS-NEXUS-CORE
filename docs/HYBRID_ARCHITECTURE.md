@@ -23,6 +23,7 @@ Client → API Key MS NEXUS → Runtime local Ollama → réponse. La future ét
 - API seule : démarre sans fournisseur commercial, mais le chat renvoie 503 tant qu'aucun runtime local n'est relié.
 - Profil `local-ai` : lance Ollama dans Docker ; télécharger ensuite un modèle avec `docker compose exec ollama ollama pull llama3.2:3b`.
 - Pour le cloud/edge : définir `LOCAL_TEXT_BASE_URL` vers le nœud Ollama accessible depuis l'API. Utiliser un VPN ou réseau privé, TLS et une authentification forte entre machines.
+- Diagnostic : `GET /admin/runtime` (clé `X-Admin-Key`) vérifie l'accessibilité des nœuds texte sans afficher leurs URL ni leurs secrets.
 - Image, audio et vidéo : déployer des workers auto-hébergés compatibles avec les routes documentées. Ces modules restent non configurés tant que leurs moteurs ne sont pas installés.
 
 ## MS CONNECT
