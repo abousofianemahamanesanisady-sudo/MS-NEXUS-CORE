@@ -18,8 +18,6 @@ class Settings(BaseSettings):
     local_image_api_key: str = ""
     local_audio_base_url: str = ""
     local_audio_api_key: str = ""
-    local_video_api_url: str = ""
-    local_video_api_key: str = ""
     ai_timeout_seconds: int = 120
     video_api_url: str = ""
     video_api_key: str = ""
