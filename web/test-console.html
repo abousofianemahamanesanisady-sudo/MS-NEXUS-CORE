@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#081326"><title>MS NEXUS PRIME — Console de test</title>
+<style>
+:root{color-scheme:dark;--bg:#081326;--panel:#101f38;--line:#263b5c;--text:#edf4ff;--muted:#9db0ca;--blue:#5b9cff;--green:#35d39a;--red:#ff7185}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#142b4c,var(--bg) 55%);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{max-width:900px;margin:auto;padding:28px 16px 48px}.top{display:flex;align-items:center;gap:14px;margin-bottom:24px}.logo{width:48px;height:48px;border:1px solid #4779b9;border-radius:15px;display:grid;place-items:center;color:#8fc1ff;font-weight:900;font-size:20px;box-shadow:0 0 28px #397bd533}
+h1{font-size:clamp(22px,5vw,32px);margin:0}.sub{color:var(--muted);margin:4px 0 0}.panel{background:#101f38eF;border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 12px 35px #0002}
+h2{font-size:16px;margin:0 0 14px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:620px){.grid{grid-template-columns:1fr}}
+label{display:block;color:#bdcce0;font-size:13px;margin:0 0 7px}input,textarea{width:100%;background:#08172b;border:1px solid #304969;color:var(--text);border-radius:10px;padding:12px;font:inherit;outline:none}input:focus,textarea:focus{border-color:var(--blue)}textarea{min-height:105px;resize:vertical}
+button{border:0;border-radius:10px;padding:11px 16px;background:var(--blue);color:#061326;font-weight:750;font-size:14px;cursor:pointer}button.secondary{background:#243b5d;color:var(--text)}button:disabled{opacity:.55;cursor:wait}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.status{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}.dot{width:9px;height:9px;border-radius:50%;background:#8394aa}.dot.ok{background:var(--green)}.dot.bad{background:var(--red)}
+#output{white-space:pre-wrap;overflow-wrap:anywhere;min-height:90px;background:#071426;border:1px solid var(--line);border-radius:12px;padding:14px;line-height:1.55}
+.note{font-size:12px;color:var(--muted);line-height:1.5}.answer{margin-top:14px}.tag{display:inline-block;padding:4px 8px;border:1px solid var(--line);border-radius:20px;color:#a9caff;font-size:12px}
+</style></head>
+<body><main>
+<header class="top"><div class="logo">NX</div><div><h1>MS NEXUS PRIME</h1><p class="sub">Console de connexion et de test API</p></div></header>
+<section class="panel"><h2>1. Connexion au moteur</h2>
+<div class="grid"><div><label for="endpoint">Adresse du Worker</label><input id="endpoint" value="https://ms-nexus-ai.msdigitalnetwork.workers.dev" autocomplete="url"></div>
+<div><label for="key">Clé API NEXUS (Bearer)</label><input id="key" type="password" placeholder="Collez votre clé secrète ici" autocomplete="off"></div></div>
+<p class="note">La clé reste uniquement dans cette page en mémoire : elle n'est ni enregistrée ni envoyée à ChatGPT. Elle est envoyée au Worker dans l'en-tête Authorization. Ne partagez pas cette page avec votre clé déjà saisie.</p>
+<div class="actions"><button class="secondary" id="health">Tester la connexion</button><button class="secondary" id="models">Vérifier le modèle</button><span class="status"><i class="dot" id="dot"></i><span id="state">En attente de test</span></span></div></section>
+<section class="panel"><h2>2. Envoyer un message à MS NEXUS</h2>
+<label for="prompt">Votre message</label><textarea id="prompt">Bonjour MS NEXUS PRIME. Présente-toi en une phrase et indique tes capacités actuelles.</textarea>
+<div class="actions"><button id="send">Envoyer le message</button><button class="secondary" id="clear">Effacer la réponse</button><span class="tag" id="model">Modèle : non vérifié</span></div>
+<div class="answer"><label>Réponse du moteur</label><div id="output" aria-live="polite">La réponse apparaîtra ici.</div></div></section>
+<p class="note">Cette console teste le Worker Cloudflare et le modèle Workers AI configuré. Elle ne prouve pas que MS NEXUS possède déjà un modèle propriétaire entraîné. N'entrez votre clé que sur un appareil de confiance.</p>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const base=()=> $('endpoint').value.trim().replace(/\/+$/,'');
+function setStatus(message,kind=''){ $('state').textContent=message; $('dot').className='dot '+kind; }
+function headers(){const key=$('key').value.trim();if(!key)throw new Error('Ajoutez votre clé API NEXUS.');return {'Authorization':'Bearer '+key,'Content-Type':'application/json'};}
+async function request(path,options={}){const response=await fetch(base()+path,options);let data;try{data=await response.json()}catch{throw new Error('Réponse non JSON (HTTP '+response.status+').')}if(!response.ok)throw new Error(data?.error?.message||'Erreur HTTP '+response.status+(data?.error?.detail?' — '+data.error.detail:''));return data;}
+$('health').onclick=async()=>{try{setStatus('Vérification…');const d=await request('/health');setStatus(d.ok?'Worker en ligne':'Réponse reçue',d.ok?'ok':'bad');$('model').textContent='Modèle : '+(d.model||'non indiqué');$('output').textContent=JSON.stringify(d,null,2);}catch(e){setStatus('Échec de connexion','bad');$('output').textContent=e.message;}};
+$('models').onclick=async()=>{try{setStatus('Vérification du modèle…');const d=await request('/v1/models',{headers:headers()});setStatus('API authentifiée','ok');$('model').textContent='Modèle : '+(d.data?.[0]?.id||'disponible');$('output').textContent=JSON.stringify(d,null,2);}catch(e){setStatus('Échec du test modèle','bad');$('output').textContent=e.message;}};
+$('send').onclick=async()=>{const prompt=$('prompt').value.trim();if(!prompt){$('output').textContent='Écrivez un message.';return;}const b=$('send');b.disabled=true;b.textContent='Envoi…';setStatus('Appel du moteur…');$('output').textContent='MS NEXUS prépare sa réponse…';try{const d=await request('/v1/chat/completions',{method:'POST',headers:headers(),body:JSON.stringify({messages:[{role:'user',content:prompt}],max_tokens:512})});const answer=d.choices?.[0]?.message?.content||'Réponse vide du moteur.';$('output').textContent=answer;setStatus('Réponse reçue','ok');$('model').textContent='Modèle : '+(d.model||'actif');}catch(e){$('output').textContent=e.message;setStatus('Erreur pendant le test','bad');}finally{b.disabled=false;b.textContent='Envoyer le message';}};
+$('clear').onclick=()=>{$('output').textContent='La réponse apparaîtra ici.';};
+</script></body></html>
