@@ -40,3 +40,25 @@ Deux voies sont donc possibles :
 ## Ce qui n'est pas encore réalisé
 
 Ce document est un plan d'architecture. Il ne signifie pas qu'un compte Cloudflare a été connecté, qu'un site a été déployé, que Workers AI est activé ou que le backend a été porté vers Workers. Ces étapes devront être effectuées et testées séparément.
+
+## Première ressource Cloudflare créée
+
+Le 9 novembre 2026, le Worker `ms-nexus-ai` a été créé dans le compte Cloudflare et déployé sur le sous-domaine workers.dev :
+
+- URL : https://ms-nexus-ai.msdigitalnetwork.workers.dev
+- Contrôle de santé : https://ms-nexus-ai.msdigitalnetwork.workers.dev/health
+- Runtime : Cloudflare Workers
+- Binding Workers AI : `AI`
+- Modèle prévu pour le chat : `@cf/zai-org/glm-4.7-flash`
+- Secret d'API : `NEXUS_API_KEY`, stocké comme secret Cloudflare (sa valeur n'est pas affichée dans le dépôt ni dans cette documentation).
+- Routes prévues : `GET /health`, `GET /v1/models`, `POST /v1/chat/completions`.
+
+Le déploiement et l'activation du sous-domaine ont été confirmés par l'API Cloudflare. La lecture externe de `/health) n'a pas pu être confirmée dans cette session : ouvrir l'URL depuis un navigateur pour effectuer le test HTTP réel.
+
+### Clé d'accès à l'API
+
+Le secret initial a été généré et enregistré côté Cloudflare. Pour utiliser l'API depuis une autre application, remplace-le par une clé que tu génères et conserves toi-même dans Cloudflare Dashboard > Workers & Pages > ms-nexus-ai > Settings > Variables and Secrets, puis utilise cette même clé comme en-tête `Authorization: Bearer ...` dans ton application. Ne l'envoie jamais dans le chat et ne la commite pas sur GitHub.
+
+### Limites
+
+Le Worker est un premier point d'entrée, pas le backend FastAPI complet du dépôt et pas un modèle de fondation entraîné par MS NEXUS. Workers AI est un service d'inférence géré par Cloudflare. Vérifier les quotas et modèles accessibles au compte avant un usage régulier. Les routes de chat sont protégées par la clé secrète.
