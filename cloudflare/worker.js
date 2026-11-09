@@ -21,11 +21,17 @@ export default {
    if (!Array.isArray(body.messages) || !body.messages.length) return json({error:{message:"messages est obligatoire."}},400);
    const messages=body.messages.slice(-20).map(m=>({role:["system","user","assistant"].includes(m.role)?m.role:"user",content:typeof m.content==="string"?m.content:JSON.stringify(m.content??"")}));
    try {
-    const result=await env.AI.run(MODEL,{messages,max_tokens:Math.min(Math.max(Number(body.max_tokens)||512,1),2048)});
-    const answer = typeof result === "string" ? result : result?.response ?? result?.choices?.[0]?.message?.content ?? result?.output_text ?? result?.content ?? "";
-    if (typeof answer !== "string" || !answer.trim()) {
-      const keys = result && typeof result === "object" ? Object.keys(result) : [];
-      return json({error:{message:"Le moteur IA a répondu sans texte exploitable. Champs reçus : "+(keys.join(", ")||"aucun champ reconnu")+".",debug:{result_type:typeof result,result_keys:keys}}},502);
+    const result=await env.AI.run(MODEL,{
+      messages,
+      max_tokens:Math.min(Math.max(Number(body.max_tokens)||512,1),2048),
+      reasoning_effort:"low",
+      chat_template_kwargs:{enable_thinking:false}
+    });
+    const candidates=[result?.response,result?.choices?.[0]?.message?.content,result?.output_text,result?.content,result?.message?.content,result?.generated_text];
+    const answer=typeof result==="string"?result:candidates.find(v=>typeof v==="string"&&v.trim())||"";
+    if (!answer.trim()) {
+      const keys=result&&typeof result==="object"?Object.keys(result):[];
+      return json({error:{message:"GLM a répondu sans texte. Diagnostic : "+(keys.join(", ")||"aucun champ")+".",debug:{result_type:typeof result,result_keys:keys}}},502);
     }
     return json({id:"msnexus-"+crypto.randomUUID(),object:"chat.completion",created:Math.floor(Date.now()/1000),model:MODEL,choices:[{index:0,message:{role:"assistant",content:answer},finish_reason:"stop"}]});
    } catch(e) { return json({error:{message:"Échec du moteur IA.",detail:String(e).slice(0,240)}},502); }
