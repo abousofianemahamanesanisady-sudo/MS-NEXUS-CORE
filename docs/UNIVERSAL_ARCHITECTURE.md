@@ -173,3 +173,70 @@ Les réponses API doivent distinguer `not_configured`, `unavailable`, `overloade
 ## 9. Définition du succès
 
 MS NEXUS AI progresse lorsque l'utilisateur peut décrire une mission, obtenir un plan, suivre son exécution, examiner des artefacts, voir les tests réellement exécutés, corriger le résultat et approuver sa livraison — sans que le système prétende avoir réalisé ce qui n'a pas été vérifié.
+
+
+## 10. Catalogue étendu des domaines de création
+
+Les domaines ci-dessous sont des **modules cibles** à intégrer au registre des capacités. Ils ne sont actifs que lorsqu'un moteur, un adaptateur, des permissions et des tests existent.
+
+### 10.1 Studios numériques
+- **APP & WEB Studio** : applications Android/iOS, applications desktop, sites, plateformes SaaS, commerce électronique, réseaux sociaux, API et outils métiers.
+- **GAME Studio** : jeux 2D/3D, simulations, mondes ouverts, jeux multijoueurs, outils de niveaux, personnages, animation et tests automatisés.
+- **4D Experience Lab** : expériences immersives combinant rendu 3D temps réel, audio spatial, vibration, sièges ou accessoires à retour haptique, mouvement et autres effets sensoriels. Le matériel compatible est indispensable ; « 4D » ne désigne pas une quatrième dimension physique créée par le logiciel.
+- **CINEMA & ANIMATION Studio** : scénarios, storyboards, bandes dessinées, anime, films, séries, montage, doublage, sous-titres et effets visuels.
+- **IMAGE & DESIGN Studio** : illustration, retouche, identité visuelle, maquettes, affiches, interfaces et assets cohérents.
+- **AUDIO & MUSIC Studio** : voix, transcription, synthèse, bruitages, composition originale, mixage et spatialisation, avec respect des droits.
+- **3D & SPATIAL Studio** : objets, scènes, architecture, visualisation, impression 3D et formats d'échange.
+- **DOCUMENT & KNOWLEDGE Studio** : PDF, livres numériques, présentations, rapports, traduction et gestion documentaire.
+
+### 10.2 Ingénierie et monde physique
+- **OS & SOFTWARE Lab** : systèmes d'exploitation, pilotes, logiciels, outils de développement et tests de compatibilité.
+- **CONSOLE Lab** : conception de consoles, architecture matérielle, contrôleurs, systèmes embarqués, prototypes et bancs de test.
+- **ROBOTICS Lab** : simulation robotique, perception, planification de mouvement, contrôle et intégration de capteurs/actionneurs.
+- **INVENTOR Lab** : conception assistée, électronique, circuits, pièces mécaniques, nomenclatures, schémas et dossiers de fabrication.
+- **DRONE & MOBILITY Lab** : simulation, conception de drones, véhicules et systèmes de mobilité ; essais physiques et conformité réglementaire obligatoires.
+- **SMART WORLD Lab** : jumeaux numériques, bâtiments, villes, infrastructures, réseaux et simulations urbaines.
+- **ENERGY Lab** : modélisation de systèmes solaires, stockage, efficacité énergétique et réseaux électriques.
+- **SPACE & ASTRONOMY Lab** : visualisation astronomique, analyse de données publiques, simulation orbitale éducative et outils scientifiques ; aucune commande réelle de véhicule spatial sans infrastructure autorisée.
+
+### 10.3 Sciences, société et services
+- **SCIENCE & MATH Lab** : calcul symbolique, simulations, visualisation, analyse reproductible et aide à la recherche.
+- **AGRI Lab** : planification agricole, diagnostic assisté à partir d'images, irrigation, météo et suivi des cultures ; les recommandations doivent être validées localement.
+- **HEALTH & WELLBEING Assistant** : éducation générale, organisation de dossiers et préparation de questions médicales ; ne remplace pas un professionnel et ne pose pas de diagnostic autonome.
+- **EDUCATION Studio** : parcours d'apprentissage, exercices, examens blancs, explications multilingues et suivi des progrès.
+- **BUSINESS & FINANCE Studio** : gestion, comptabilité assistée, tableaux de bord, études de marché et prévisions avec hypothèses explicites ; aucune transaction sans approbation.
+- **LAW & CIVIC Information** : explication générale de documents et informations publiques, avec indication du pays, de la date et de la nécessité d'un avis professionnel.
+- **LANGUAGE & ACCESSIBILITY** : traduction, transcription, sous-titrage, lecture à voix haute, simplification, interfaces accessibles et langues locales.
+- **CLIMATE & ENVIRONMENT Lab** : analyse de données climatiques, eau, biodiversité, déchets et scénarios environnementaux.
+- **TRANSPORT & LOGISTICS Lab** : planification d'itinéraires, stocks, flottes et simulations logistiques ; aucune commande de véhicule réel sans contrôles.
+- **CYBER DEFENSE Lab** : audit autorisé, analyse de dépendances, détection de vulnérabilités, durcissement et réponse défensive ; pas d'opérations offensives non autorisées.
+
+### 10.4 Intelligence et collaboration
+- **NEXUS MEMORY** : mémoire contrôlée par projet, provenance, rétention configurable et suppression vérifiable.
+- **NEXUS RESEARCH** : recherche sourcée, comparaison des preuves, dates, incertitudes et bibliographies.
+- **NEXUS MULTI-AGENT** : agents de planification, recherche, création, revue, tests et livraison, coordonnés par un orchestrateur.
+- **NEXUS DIGITAL TWIN** : représentation simulée d'un produit ou processus, calibrée avec des données fiables et des limites documentées.
+- **NEXUS PERSONAL ASSISTANT** : tâches, calendrier, rappels et workflows avec consentement explicite.
+- **NEXUS PLUGIN MARKET** : extensions signées, permissions visibles, provenance, versionnement et révocation.
+- **NEXUS API & SDK** : interfaces développeur, documentation, exemples et environnement de test.
+- **NEXUS LOCAL MODE** : fonctions hors ligne ou locales quand le modèle et l'appareil le permettent.
+
+## 11. Capacités transversales supplémentaires
+
+1. **Project-to-Product** : convertir une idée en cahier des charges, prototype, tests, documentation et paquet livrable.
+2. **Self-Testing** : chaque artefact généré reçoit des tests pertinents et un rapport ; les tests non exécutés sont signalés.
+3. **Visual Debugger** : analyser captures, journaux, traces et erreurs pour proposer une correction.
+4. **Version & Rollback Manager** : versions de projets, comparaisons, sauvegardes et retour arrière.
+5. **Cost & Resource Planner** : estimer CPU/GPU, mémoire, stockage, temps et coûts avant les tâches lourdes.
+6. **Offline Knowledge Packs** : bases de connaissances téléchargeables avec source, date et version.
+7. **Multilingual Niger-first** : expérience française et préparation progressive de langues locales, avec validation par locuteurs compétents.
+8. **Collaboration & Classroom** : espaces d'équipe, partage contrôlé, rôles, commentaires et apprentissage collectif.
+9. **Accessibility-by-design** : navigation clavier, contraste, lecteurs d'écran, sous-titres et commandes vocales.
+10. **Provenance & Trust Center** : indiquer quels modèles, données, outils et versions ont produit chaque résultat.
+11. **Simulation Sandbox** : tester logiciels, robots, véhicules et infrastructures dans des environnements virtuels avant tout essai réel.
+12. **Human Approval Center** : boîte de validation des publications, dépenses, transactions, déploiements et opérations physiques.
+
+## 12. Conditions spéciales pour les domaines à risque
+
+Les fonctions santé, finance, droit, cybersécurité, robotique, drones, mobilité, énergie et systèmes physiques doivent avoir des politiques spécifiques, des tests dédiés, des limites d'usage, des avertissements pertinents et une validation humaine qualifiée. Une simulation réussie ne prouve pas la sécurité d'un système réel.
+
