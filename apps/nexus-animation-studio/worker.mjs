@@ -1,4 +1,4 @@
-const APP = String.raw\`<!doctype html>
+const APP = String.raw`<!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#080d1b"><title>NEXUS ANIMATION STUDIO</title>
 <style>
 :root{color-scheme:dark;--bg:#080d1b;--panel:#101a2d;--panel2:#14223a;--line:#263b5d;--muted:#93a8c8;--text:#eef4ff;--cyan:#58d7f5;--violet:#a78bfa;--green:#57d6a0;--orange:#ffbd69}
@@ -31,7 +31,7 @@ $('export').onclick=()=>{if(!current)return;const blob=new Blob([JSON.stringify(
 $('delete').onclick=()=>{if(!current||!confirm('Supprimer ce projet de cet appareil ?'))return;projects=projects.filter(p=>p.id!==current.id);current=null;save();$('workspace').innerHTML='<div class="empty">Projet supprimé.</div>';$('projectActions').hidden=true};
 $('extend').onclick=()=>{if(!current)return;const add=prompt('Combien de minutes ajouter ? (1 à 60)', '5');const n=Number(add);if(!Number.isInteger(n)||n<1||n>60){alert('Entre une durée entière entre 1 et 60 minutes.');return}const total=current.duration_minutes+n;if(total>60){alert('La durée totale ne peut pas dépasser 60 minutes dans cette version.');return}$('idea').value=current.synopsis+'\\n\\nSuite à écrire : continuer exactement après les événements de la dernière scène, sans modifier les personnages ni les faits établis.';$('title').value=current.title+' — Suite';$('duration').value=String(n);$('generate').scrollIntoView({behavior:'smooth',block:'center'});alert('Le brief de continuation est préparé. Vérifie-le puis génère la suite. Elle sera enregistrée comme un nouveau projet, sans écraser l’original.')};
 renderSaved();if(projects.length){current=projects[0];renderWorkspace()}
-</script></body></html>\`;
+</script></body></html>`;
 
 function json(data, status=200) { return new Response(JSON.stringify(data), { status, headers: { "content-type":"application/json; charset=utf-8", "cache-control":"no-store" } }); }
 function fallback(input) {
